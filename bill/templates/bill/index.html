@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bill payment</title>
+    <style>
+        .table{
+            border-collapse: collapse;
+            min-width: 500px;
+            font-size: 22px;
+            margin: 25px 0;
+            width: 100vw;
+
+        }
+        .table thead tr{
+            background-color: steelblue;
+            color: aliceblue;
+            text-align: left;
+            font-weight: bold;
+        }
+        .table th,
+        .table td{
+            padding: 12px 15px;
+        }
+        .table tbody tr{
+            border-bottom: 2px solid grey;
+            text-transform: capitalize;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+            font-size: larger;
+        }
+    </style>
+</head>
+<body>
+    <h1>welcome to bill payment management system</h1>
+    <div class="buttons">
+        <button><a href="{% url 'newcon' %}">New Connection</a></button>
+        <input type="search" name="search" id="search">
+    </div>
+    <h1>List of all connections</h1>
+    <table class="table">
+        <thead>
+            <tr><th>NAME</th> 
+            <th>BILL</th>
+            <th>Payment Dated</th>
+            <th>Payment</th>
+        </tr>
+        
+        </thead>
+        <tbody> 
+            {% for person in persons %}
+            <tr><td>{{ person.name }}</td>
+                <td>{{ person.bill }}</td> 
+                <td>{{ person.paidDate }}</td>
+                <td><input type="button" value="pay" data-user="{{ person.name }},{{ person.bill }},{{ person.paidDate }}"></td>
+            </tr>
+            {% endfor %}
+        </tbody></table>
+       
+</body>
+</html>
