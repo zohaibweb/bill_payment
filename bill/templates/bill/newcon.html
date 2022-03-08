@@ -18,11 +18,11 @@
 </head>
 <body>
     <h1>Apply for new connection</h1>
-   
-    <form method="post">
-        {% csrf_token %}
+    <form action="" method="POST">
+        {% csrf_token %} 
         {{ form.as_p }}
-        <input type="submit" value="add memeber">
+        <input type="submit" value="Add Connection">
+        <button><a href="{% url 'home' %}">home page</a></button>
     </form>
 </body>
 </html>

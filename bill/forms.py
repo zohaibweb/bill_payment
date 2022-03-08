@@ -1,6 +1,7 @@
 from django import forms
-
-class PersonRegistration(forms.Form):
-    name=forms.CharField()
-    bill=forms.IntegerField()
-    paidDate=forms.DateInput()
+from .models import Bnda
+class PersonRegistration(forms.ModelForm):
+    class Meta:
+        model = Bnda
+        fields = ['name', 'bill', 'paidDate']
+   

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Bnda
@@ -30,7 +30,19 @@ def newuser(request):
     if request.method=='POST':
         fm = PersonRegistration(request.POST)
         if fm.is_valid():
-            Bnda.objects.create(name= fm.cleaned_data['name'], bill = form.cleaned_data['bill'], paidDate= fm.cleaned_data['paidDate'])
+            nm = fm.cleaned_data['name']
+            bil = fm.cleaned_data['bill']
+            pd = fm.cleaned_data['paidDate']
+            reg = Bnda(name=nm, bill=bil, paidDate=pd)
+            reg.save()
     else:
         fm = PersonRegistration()        
-    return render(request, 'bill/newcon.html', {'form':fm})    
+    return render(request, 'bill/newcon.html', {'form':fm})  
+
+
+
+def delete_data(request, id):
+    if request.method == 'POST':
+        bo = Bnda.objects.get(pk=id)
+        bo.delete()
+        return redirect('home')

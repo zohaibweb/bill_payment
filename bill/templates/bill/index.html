@@ -33,6 +33,18 @@
             color: black;
             font-size: larger;
         }
+        .delete{
+            display: inline-block;
+        }
+        .btn{
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid steelblue;
+            border-radius: 4px;
+            padding: 5px 3px;
+        }
     </style>
 </head>
 <body>
@@ -47,7 +59,7 @@
             <tr><th>NAME</th> 
             <th>BILL</th>
             <th>Payment Dated</th>
-            <th>Payment</th>
+            <th>Actions</th>
         </tr>
         
         </thead>
@@ -56,7 +68,14 @@
             <tr><td>{{ person.name }}</td>
                 <td>{{ person.bill }}</td> 
                 <td>{{ person.paidDate }}</td>
-                <td><input type="button" value="pay" data-user="{{ person.name }},{{ person.bill }},{{ person.paidDate }}"></td>
+                <td>
+                    <button><a href="#">Pay</a></button>
+                    <form action="{% url 'deletedata' person.id %}" class="delete" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="delete" class="btn">
+                    </form>
+                
+                </td>
             </tr>
             {% endfor %}
         </tbody></table>
