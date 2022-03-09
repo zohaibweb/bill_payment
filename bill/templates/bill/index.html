@@ -44,6 +44,8 @@
             border: 1px solid steelblue;
             border-radius: 4px;
             padding: 5px 3px;
+            background-color: steelblue;
+            color: aliceblue;
         }
     </style>
 </head>
@@ -69,7 +71,7 @@
                 <td>{{ person.bill }}</td> 
                 <td>{{ person.paidDate }}</td>
                 <td>
-                    <button><a href="#">Pay</a></button>
+                    <a class="btn"href="{% url 'updatedata' person.id %}">Pay</a>
                     <form action="{% url 'deletedata' person.id %}" class="delete" method="post">
                         {% csrf_token %}
                         <input type="submit" value="delete" class="btn">

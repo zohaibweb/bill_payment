@@ -46,3 +46,15 @@ def delete_data(request, id):
         bo = Bnda.objects.get(pk=id)
         bo.delete()
         return redirect('home')
+
+
+def update_data(request, id):
+   if request.method == 'POST':
+       pi = Bnda.objects.get(pk=id)
+       fm = PersonRegistration(request.POST, instance=pi)
+       if fm.is_valid():
+           fm.save()
+   else:
+        pi = Bnda.objects.get(pk=id)
+        fm = PersonRegistration(instance=pi)        
+   return render(request, 'bill/update.html', {'form':fm})
